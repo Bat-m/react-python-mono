@@ -1,4 +1,4 @@
-# Turborepo starter
+# Monorepo utilisant turborepo react + python
 
 This is an official starter Turborepo.
 
@@ -15,8 +15,7 @@ npx create-turbo@latest
 This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
+- `api`: back with [poetry](https://python-poetry.org/)
 - `web`: another [Next.js](https://nextjs.org/) app
 - `ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
@@ -71,11 +70,4 @@ npx turbo link
 
 ## Useful Links
 
-Learn more about the power of Turborepo:
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
