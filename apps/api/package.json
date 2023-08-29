@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": " poetry run launch",
+    "start": "poetry shell && poetry run launch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
