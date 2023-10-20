@@ -17,9 +17,10 @@ This Turborepo includes the following packages/apps:
 ### Apps and Packages
 - `api`: back with [poetry](https://python-poetry.org/)
 - `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `web/components/ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `@packages`: to define
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
