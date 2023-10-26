@@ -1,5 +1,9 @@
 "use client";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
+import { Button } from "@/components/ui/button";
+import { da } from "date-fns/locale";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 // Define your form schema using zod
@@ -15,15 +19,16 @@ const dataServerFormSchema = z.object({
   companyName:z.string(),
   companyEmail: z.string(),
   companyAddress: z.object({
-    companyStreetAdress: z.string(),
-    companyCity: z.string(),
-    companyZipCode: z.string(),
-    companyCountry: z.string(),//check list api clevercloud
+    companyStreetAdress: z.string().optional(),
+    companyCity: z.string().optional(),
+    companyZipCode: z.string().optional(),
+    companyCountry: z.string().optional(),//check list api clevercloud
   }),
 
 });
 
 export const DataServerForm=() =>{
+  
   return (
     <AutoForm
       // Pass the schema to the form
