@@ -3,6 +3,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { BrandingForm } from "./_forms/branding-forms"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DataServerForm } from "./_forms/data-server-forms"
+import PollPage from "./_components/poll-page"
 
 
 
@@ -27,7 +28,7 @@ export default function DashboardPage() {
 
       </Tabs>
 
-
+<PollPage/>
     </>
   )
 }

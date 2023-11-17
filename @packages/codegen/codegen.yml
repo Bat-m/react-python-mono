@@ -1,0 +1,11 @@
+schema: http://127.0.0.1:8000/graphql
+documents:
+  ./graphql
+generates:
+  ./graphql.ts:
+    config:
+      withHooks: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql

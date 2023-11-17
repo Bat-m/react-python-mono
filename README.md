@@ -15,8 +15,8 @@ npx create-turbo@latest
 This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
-- `api`: back with [poetry](https://python-poetry.org/)
-- `web`: another [Next.js](https://nextjs.org/) app
+- `api`: back with [poetry](https://python-poetry.org/) localhost:8000
+- `web`: another [Next.js](https://nextjs.org/) app localhost:3000
 - `web/components/ui`: a stub React component library shared by both `web` and `docs` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
@@ -71,4 +71,4 @@ npx turbo link
 
 ## Useful Links
 
-
+- [Uvivorn](https://github.com/encode/uvicorn) uvicorn est un serveur web asynchrone qui joue un rôle clé dans l'exécution d'applications web asynchrones,
