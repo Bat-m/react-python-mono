@@ -72,3 +72,10 @@ npx turbo link
 ## Useful Links
 
 - [Uvivorn](https://github.com/encode/uvicorn) uvicorn est un serveur web asynchrone qui joue un rôle clé dans l'exécution d'applications web asynchrones,
+
+
+pour générer la bdd aller a la racine du fichier models.py
+puis lancer poetry run python models/models.py
+
+pour générer le grapqhl.ts aller a la racine de @package/codegen
+puis lancer pnpm codegen (le serveur doit tourner)
