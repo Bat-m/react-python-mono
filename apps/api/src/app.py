@@ -1,23 +1,3 @@
-# from typing import Optional
-
-# import strawberry
-# from sqlalchemy import select
-# from starlette.applications import Starlette
-# from starlette.responses import JSONResponse
-# from starlette.routing import Route
-# from strawberry.asgi import GraphQL
-
-# # schema = strawberry.Schema(query=Query, mutation=Mutation)
-# # graphql_app = GraphQL(schema)
-# async def homepage(request):
-#     return JSONResponse({'hello': 'world'})
-
-# routes = [
-#     Route("/", endpoint=homepage)
-# ]
-
-# app = Starlette(debug=True, routes=routes)
-# # app.add_route("/graphql", graphql_app)
 
 from typing import Optional
 
@@ -30,90 +10,87 @@ from models import models
 
 
 @strawberry.type
-class Location:
+class Project:
     id: strawberry.ID
-    name: str
-
+    project_name: str
+    branding:Optional["Branding"] = None
     @classmethod
-    def marshal(cls, model: models.Location) -> "Location":
-        return cls(id=strawberry.ID(str(model.id)), name=model.name)
+    def marshal(cls, model: models.Project) -> "Project":
+        return cls(
+            id=strawberry.ID(str(model.id)), 
+            project_name=model.project_name,
+            branding=Branding.marshal(model.branding) if model.branding else None
+            )
 
 
 @strawberry.type
-class Task:
+class Branding:
     id: strawberry.ID
-    name: str
-    location: Optional[Location] = None
+    favicon: str
 
     @classmethod
-    def marshal(cls, model: models.Task) -> "Task":
+    def marshal(cls, model: models.Branding) -> "Branding":
         return cls(
             id=strawberry.ID(str(model.id)),
-            name=model.name,
-            location=Location.marshal(model.location) if model.location else None,
+            name=model.name
         )
 
 
-# @strawberry.type
-# class LocationNotFound:
-#     message: str = "Location with this name does not exist"
-
-
-AddTaskResponse = strawberry.union("AddTaskResponse", (Task,))
-
-
 @strawberry.type
-class LocationExists:
-    message: str = "Location with this name already exist"
+class BrandingNotFound:
+    message: str = "Branding with this name does not exist"
+@strawberry.type
+class ProjectExists:
+    message: str = "Project with this name already exist"
 
+AddProjectResponse = strawberry.union("AddProjectResponse", (Project,ProjectExists))
 
-AddLocationResponse = strawberry.union("AddLocationResponse", (Location, LocationExists))
+AddBrandingResponse = strawberry.union("AddBrandingResponse", (Branding,))
 
 
 @strawberry.type
 class Mutation:
     @strawberry.mutation
-    async def add_task(self, name: str, location_name: Optional[str]) -> AddTaskResponse:
+    async def add_Branding(self, favicon: str) -> AddBrandingResponse:
         async with models.get_session() as s:
-            db_location = None
-            if location_name:
-                sql = select(models.Location).where(models.Location.name == location_name)
-                db_location = (await s.execute(sql)).scalars().first()
-                # if db_location is None:
-                #     return LocationNotFound()
-            db_task = models.Task(name=name, location=db_location)
-            s.add(db_task)
+            # if location_name:
+            #     sql = select(models.Location).where(models.Location.name == location_name)
+            #     db_location = (await s.execute(sql)).scalars().first()
+            #     # if db_location is None:
+            #     #     return BrandingNotFound()
+            db_branding = models.Branding(favicon=favicon)
+            s.add(db_branding)
             await s.commit()
-        return Task.marshal(db_task)
+        return Branding.marshal(db_branding)
 
     @strawberry.mutation
-    async def add_location(self, name: str) -> AddLocationResponse:
+    async def add_Project(self, project_name: str) -> AddProjectResponse:
         async with models.get_session() as s:
-            sql = select(models.Location).where(models.Location.name == name)
-            existing_db_location = (await s.execute(sql)).first()
-            if existing_db_location is not None:
-                return LocationExists()
-            db_location = models.Location(name=name)
-            s.add(db_location)
+            sql = select(models.Project).where(models.Project.project_name == project_name)
+            existing_db_project = (await s.execute(sql)).first()
+            if existing_db_project is not None:
+                return ProjectExists()
+            db_project = models.Project(project_name=project_name)
+            s.add(db_project)
             await s.commit()
-        return Location.marshal(db_location)
+        return Project.marshal(db_project)
 
 
 @strawberry.type
 class Query:
     @strawberry.field
-    async def tasks(self) -> list[Task]:
+    async def brandings(self) -> list[Branding]:
         async with models.get_session() as s:
-            sql = select(models.Task).order_by(models.Task.name)
-            db_tasks = (await s.execute(sql)).scalars().unique().all()
-        return [Task.marshal(task) for task in db_tasks]
+            sql = select(models.Branding).order_by(models.Branding.id)
+            db_brandings = (await s.execute(sql)).scalars().unique().all()
+        return [Branding.marshal(branding) for branding in db_brandings]
 
     @strawberry.field
-    async def locations(self) -> list[Location]:
+    async def projects(self) -> list[Project]:
         async with models.get_session() as s:
-            sql = select(models.Location).order_by(models.Location.name)
-            db_locations = (await s.execute(sql)).scalars().unique().all()
-        return [Location.marshal(loc) for loc in db_locations]
+            sql = select(models.Project).order_by(models.Project.project_name)
+            db_projects = (await s.execute(sql)).scalars().unique().all()
+        return [Project.marshal(loc) for loc in db_projects]
 
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)

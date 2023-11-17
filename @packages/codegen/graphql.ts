@@ -15,148 +15,143 @@ export type Scalars = {
   Float: number;
 };
 
-export type AddLocationResponse = Location | LocationExists;
+export type AddBrandingResponse = Branding;
 
-export type AddTaskResponse = Task;
+export type AddProjectResponse = Project | ProjectExists;
 
-export type Location = {
-  __typename?: 'Location';
+export type Branding = {
+  __typename?: 'Branding';
+  favicon: Scalars['String'];
   id: Scalars['ID'];
-  name: Scalars['String'];
-};
-
-export type LocationExists = {
-  __typename?: 'LocationExists';
-  message: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addLocation: AddLocationResponse;
-  addTask: AddTaskResponse;
+  addBranding: AddBrandingResponse;
+  addProject: AddProjectResponse;
 };
 
 
-export type MutationAddLocationArgs = {
-  name: Scalars['String'];
+export type MutationAddBrandingArgs = {
+  favicon: Scalars['String'];
 };
 
 
-export type MutationAddTaskArgs = {
-  locationName?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
+export type MutationAddProjectArgs = {
+  projectName: Scalars['String'];
+};
+
+export type Project = {
+  __typename?: 'Project';
+  branding?: Maybe<Branding>;
+  id: Scalars['ID'];
+  projectName: Scalars['String'];
+};
+
+export type ProjectExists = {
+  __typename?: 'ProjectExists';
+  message: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  locations: Array<Location>;
-  tasks: Array<Task>;
+  brandings: Array<Branding>;
+  projects: Array<Project>;
 };
 
-export type Task = {
-  __typename?: 'Task';
-  id: Scalars['ID'];
-  location?: Maybe<Location>;
-  name: Scalars['String'];
-};
-
-export type TasksQueryVariables = Exact<{ [key: string]: never; }>;
+export type BrandingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TasksQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, name: string, location?: { __typename?: 'Location', name: string } | null }> };
+export type BrandingsQuery = { __typename?: 'Query', brandings: Array<{ __typename?: 'Branding', id: string, favicon: string }> };
 
-export type LocationsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LocationsQuery = { __typename?: 'Query', locations: Array<{ __typename?: 'Location', id: string, name: string }> };
+export type ProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, projectName: string }> };
 
-export type TaskFieldsFragment = { __typename?: 'Task', id: string, name: string, location?: { __typename?: 'Location', name: string } | null };
+export type BrandingFieldsFragment = { __typename?: 'Branding', id: string, favicon: string };
 
-export type LocationFieldsFragment = { __typename?: 'Location', id: string, name: string };
+export type ProjectFieldsFragment = { __typename?: 'Project', id: string, projectName: string };
 
-export type AddTaskMutationVariables = Exact<{
-  name: Scalars['String'];
-  locationName: Scalars['String'];
+export type AddBrandingMutationVariables = Exact<{
+  favicon: Scalars['String'];
 }>;
 
 
-export type AddTaskMutation = { __typename?: 'Mutation', addTask: { __typename: 'Task', id: string, name: string, location?: { __typename?: 'Location', name: string } | null } };
+export type AddBrandingMutation = { __typename?: 'Mutation', addBranding: { __typename: 'Branding', id: string, favicon: string } };
 
-export type AddLocationMutationVariables = Exact<{
-  name: Scalars['String'];
+export type AddProjectMutationVariables = Exact<{
+  projectName: Scalars['String'];
 }>;
 
 
-export type AddLocationMutation = { __typename?: 'Mutation', addLocation: { __typename: 'Location', id: string, name: string } | { __typename: 'LocationExists', message: string } };
+export type AddProjectMutation = { __typename?: 'Mutation', addProject: { __typename: 'Project', id: string, projectName: string } | { __typename: 'ProjectExists', message: string } };
 
-export const TaskFieldsFragmentDoc = gql`
-    fragment TaskFields on Task {
+export const BrandingFieldsFragmentDoc = gql`
+    fragment BrandingFields on Branding {
   id
-  name
-  location {
-    name
-  }
+  favicon
 }
     `;
-export const LocationFieldsFragmentDoc = gql`
-    fragment LocationFields on Location {
+export const ProjectFieldsFragmentDoc = gql`
+    fragment ProjectFields on Project {
   id
-  name
+  projectName
 }
     `;
-export const TasksDocument = gql`
-    query Tasks {
-  tasks {
-    ...TaskFields
+export const BrandingsDocument = gql`
+    query Brandings {
+  brandings {
+    ...BrandingFields
   }
 }
-    ${TaskFieldsFragmentDoc}`;
+    ${BrandingFieldsFragmentDoc}`;
 
-export function useTasksQuery(options?: Omit<Urql.UseQueryArgs<TasksQueryVariables>, 'query'>) {
-  return Urql.useQuery<TasksQuery, TasksQueryVariables>({ query: TasksDocument, ...options });
+export function useBrandingsQuery(options?: Omit<Urql.UseQueryArgs<BrandingsQueryVariables>, 'query'>) {
+  return Urql.useQuery<BrandingsQuery, BrandingsQueryVariables>({ query: BrandingsDocument, ...options });
 };
-export const LocationsDocument = gql`
-    query Locations {
-  locations {
-    ...LocationFields
+export const ProjectsDocument = gql`
+    query Projects {
+  projects {
+    ...ProjectFields
   }
 }
-    ${LocationFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
-export function useLocationsQuery(options?: Omit<Urql.UseQueryArgs<LocationsQueryVariables>, 'query'>) {
-  return Urql.useQuery<LocationsQuery, LocationsQueryVariables>({ query: LocationsDocument, ...options });
+export function useProjectsQuery(options?: Omit<Urql.UseQueryArgs<ProjectsQueryVariables>, 'query'>) {
+  return Urql.useQuery<ProjectsQuery, ProjectsQueryVariables>({ query: ProjectsDocument, ...options });
 };
-export const AddTaskDocument = gql`
-    mutation AddTask($name: String!, $locationName: String!) {
-  addTask(name: $name, locationName: $locationName) {
+export const AddBrandingDocument = gql`
+    mutation AddBranding($favicon: String!) {
+  addBranding(favicon: $favicon) {
     __typename
-    ... on Task {
+    ... on Branding {
       __typename
-      ...TaskFields
+      ...BrandingFields
     }
   }
 }
-    ${TaskFieldsFragmentDoc}`;
+    ${BrandingFieldsFragmentDoc}`;
 
-export function useAddTaskMutation() {
-  return Urql.useMutation<AddTaskMutation, AddTaskMutationVariables>(AddTaskDocument);
+export function useAddBrandingMutation() {
+  return Urql.useMutation<AddBrandingMutation, AddBrandingMutationVariables>(AddBrandingDocument);
 };
-export const AddLocationDocument = gql`
-    mutation AddLocation($name: String!) {
-  addLocation(name: $name) {
+export const AddProjectDocument = gql`
+    mutation AddProject($projectName: String!) {
+  addProject(projectName: $projectName) {
     __typename
-    ... on LocationExists {
+    ... on ProjectExists {
       __typename
       message
     }
-    ... on Location {
+    ... on Project {
       __typename
-      ...LocationFields
+      ...ProjectFields
     }
   }
 }
-    ${LocationFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
-export function useAddLocationMutation() {
-  return Urql.useMutation<AddLocationMutation, AddLocationMutationVariables>(AddLocationDocument);
+export function useAddProjectMutation() {
+  return Urql.useMutation<AddProjectMutation, AddProjectMutationVariables>(AddProjectDocument);
 };

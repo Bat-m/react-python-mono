@@ -1,52 +1,49 @@
-query Tasks {
-  tasks {
-    ...TaskFields
+query Brandings {
+  brandings {
+    ...BrandingFields
   }
 }
 
-query Locations {
-  locations {
-    ...LocationFields
+query Projects {
+  projects {
+    ...ProjectFields
   }
 }
 
-fragment TaskFields on Task {
+fragment BrandingFields on Branding {
   id
-  name
-  location {
-    name
-  }
+  favicon
 }
 
-fragment LocationFields on Location {
+fragment ProjectFields on Project {
   id
-  name
+  projectName
 }
 
-mutation AddTask($name: String!, $locationName: String!) {
-  addTask(name: $name, locationName: $locationName) {
+mutation AddBranding($favicon: String!) {
+  addBranding(favicon: $favicon) {
     __typename
-    # ... on LocationNotFound {
+    # ... on BrandingNotFound {
     #   __typename
     #   message
     # }
-    ... on Task {
+    ... on Branding {
       __typename
-      ...TaskFields
+      ...BrandingFields
     }
   }
 }
 
-mutation AddLocation($name: String!) {
-  addLocation(name: $name) {
+mutation AddProject($projectName: String!) {
+  addProject(projectName: $projectName) {
     __typename
-    ... on LocationExists {
+    ... on ProjectExists {
       __typename
       message
     }
-    ... on Location {
+    ... on Project {
       __typename
-      ...LocationFields
+      ...ProjectFields
     }
   }
 }

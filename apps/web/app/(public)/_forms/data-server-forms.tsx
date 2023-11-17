@@ -1,9 +1,8 @@
 "use client";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { Button } from "@/components/ui/button";
-import { da } from "date-fns/locale";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+
+import { toast } from "sonner";
 import * as z from "zod";
 
 // Define your form schema using zod
@@ -17,7 +16,7 @@ const dataServerFormSchema = z.object({
   }),
   isCompany: z.boolean(),
   companyName:z.string(),
-  companyEmail: z.string(),
+  companyEmail: z.string().email(),
   companyAddress: z.object({
     companyStreetAdress: z.string().optional(),
     companyCity: z.string().optional(),
@@ -31,6 +30,7 @@ export const DataServerForm=() =>{
   
   return (
     <AutoForm
+    onSubmit={(data) => toast(JSON.stringify(data))}
       // Pass the schema to the form
       formSchema={dataServerFormSchema}
       // You can add additional config for each field
@@ -43,7 +43,9 @@ export const DataServerForm=() =>{
       to create auto-saving forms etc.
       */}
       <AutoFormSubmit>Valider</AutoFormSubmit>
-
+      <Button onClick={() => toast('test')}>
+  Give me a toast
+</Button>
      
      
     </AutoForm>

@@ -2,12 +2,14 @@
 import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
+import { toast } from 'sonner';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
 import { MinusCircle, PlusCircle, Star, Image, Palette, Type, Database } from "lucide-react";
 import { Fragment } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
+import { DevTool } from "@hookform/devtools";
 
 // Define your form schema using zod
 const brandingFormSchema = z.object({
@@ -43,9 +45,11 @@ export const BrandingForm = () => {
     control,
     name: "colors"
   });
-  const onSubmit = (data: z.infer<typeof brandingFormSchema>) => console.log("data: ", data);
+  const onSubmit = (data: z.infer<typeof brandingFormSchema>) =>{ console.log('data: ',data); return toast(JSON.stringify(data))};
 
   return (
+    <>
+   
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mt-6 space-y-6">
       <div className="space-y-2">
         <Label className="flex space-x-4"><Star color="orange" /> <p>Favicon</p></Label>
@@ -102,5 +106,10 @@ export const BrandingForm = () => {
 
       <Button type="submit">Valider</Button>
     </form>
+    <Button onClick={() => toast('test')}>
+  Give me a toast
+</Button>
+    <DevTool control={control} />
+    </>
   );
 }

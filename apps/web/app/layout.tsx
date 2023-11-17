@@ -1,5 +1,7 @@
 import { ApolloWrapper } from "@/lib/apollo-wrapper";
 import "../styles/globals.css"
+import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
 export default function RootLayout({
   children
 }: {
@@ -7,7 +9,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body><ApolloWrapper>{children}</ApolloWrapper></body>
+      <body>
+        <Toaster />
+        <ApolloWrapper>{children}</ApolloWrapper>
+        
+      </body>
     </html>
   );
 }
