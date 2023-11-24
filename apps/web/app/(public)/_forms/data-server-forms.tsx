@@ -1,6 +1,8 @@
 "use client";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { Button } from "@/components/ui/button";
+import { Project } from "@packages/codegen";
+import { useAddProjectMutation } from "@packages/codegen";
 
 import { toast } from "sonner";
 import * as z from "zod";
@@ -26,11 +28,30 @@ const dataServerFormSchema = z.object({
 
 });
 
+
+
 export const DataServerForm=() =>{
+
+  const [addProject, { data, loading, error }] = useAddProjectMutation();
+  const onSubmit = (data:z.infer<typeof dataServerFormSchema>) => {
+    console.log(data);
   
+    addProject({
+      variables:{
+        projectName:data.projectName, 
+        description:data.description, 
+        isCompany:data.isCompany, 
+        companyName:data.companyName, 
+        companyEmail:data.companyEmail, 
+        companyStreetAddress:data.companyAddress?.companyStreetAdress, 
+        companyCity:data.companyAddress?.companyCity, 
+        companyZipCode:data.companyAddress.companyZipCode, 
+        companyCountry:data.companyAddress.companyCountry
+      }});
+  }
   return (
     <AutoForm
-    onSubmit={(data) => toast(JSON.stringify(data))}
+    onSubmit={onSubmit}
       // Pass the schema to the form
       formSchema={dataServerFormSchema}
       // You can add additional config for each field

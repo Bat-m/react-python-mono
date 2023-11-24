@@ -1,57 +1,9 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// graphql.ts
-var graphql_exports = {};
-__export(graphql_exports, {
-  AddBrandingDocument: () => AddBrandingDocument,
-  AddProjectDocument: () => AddProjectDocument,
-  BrandingFieldsFragmentDoc: () => BrandingFieldsFragmentDoc,
-  BrandingsDocument: () => BrandingsDocument,
-  ProjectFieldsFragmentDoc: () => ProjectFieldsFragmentDoc,
-  ProjectsDocument: () => ProjectsDocument,
-  useAddBrandingMutation: () => useAddBrandingMutation,
-  useAddProjectMutation: () => useAddProjectMutation,
-  useBrandingsLazyQuery: () => useBrandingsLazyQuery,
-  useBrandingsQuery: () => useBrandingsQuery,
-  useBrandingsSuspenseQuery: () => useBrandingsSuspenseQuery,
-  useProjectsLazyQuery: () => useProjectsLazyQuery,
-  useProjectsQuery: () => useProjectsQuery,
-  useProjectsSuspenseQuery: () => useProjectsSuspenseQuery
-});
-module.exports = __toCommonJS(graphql_exports);
-var import_client = require("@apollo/client");
-var Apollo = __toESM(require("@apollo/client"));
-var defaultOptions = {};
-var BrandingFieldsFragmentDoc = import_client.gql`
+"use strict";var S=Object.create;var p=Object.defineProperty;var j=Object.getOwnPropertyDescriptor;var A=Object.getOwnPropertyNames;var B=Object.getPrototypeOf,P=Object.prototype.hasOwnProperty;var x=(t,e)=>{for(var r in e)p(t,r,{get:e[r],enumerable:!0})},g=(t,e,r,c)=>{if(e&&typeof e=="object"||typeof e=="function")for(let i of A(e))!P.call(t,i)&&i!==r&&p(t,i,{get:()=>e[i],enumerable:!(c=j(e,i))||c.enumerable});return t};var Q=(t,e,r)=>(r=t!=null?S(B(t)):{},g(e||!t||!t.__esModule?p(r,"default",{value:t,enumerable:!0}):r,t)),M=t=>g(p({},"__esModule",{value:!0}),t);var $={};x($,{AddBrandingDocument:()=>l,AddProjectDocument:()=>m,BrandingFieldsFragmentDoc:()=>y,BrandingsDocument:()=>s,ProjectFieldsFragmentDoc:()=>d,ProjectsDocument:()=>u,useAddBrandingMutation:()=>R,useAddProjectMutation:()=>V,useBrandingsLazyQuery:()=>_,useBrandingsQuery:()=>b,useBrandingsSuspenseQuery:()=>C,useProjectsLazyQuery:()=>k,useProjectsQuery:()=>f,useProjectsSuspenseQuery:()=>T});module.exports=M($);var a=require("@apollo/client"),n=Q(require("@apollo/client")),o={},y=a.gql`
     fragment BrandingFields on Branding {
   id
   favicon
 }
-    `;
-var ProjectFieldsFragmentDoc = import_client.gql`
+    `,d=a.gql`
     fragment ProjectFields on Project {
   id
   projectName
@@ -64,46 +16,19 @@ var ProjectFieldsFragmentDoc = import_client.gql`
   description
   isCompany
 }
-    `;
-var BrandingsDocument = import_client.gql`
+    `,s=a.gql`
     query Brandings {
   brandings {
     ...BrandingFields
   }
 }
-    ${BrandingFieldsFragmentDoc}`;
-function useBrandingsQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery(BrandingsDocument, options);
-}
-function useBrandingsLazyQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery(BrandingsDocument, options);
-}
-function useBrandingsSuspenseQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery(BrandingsDocument, options);
-}
-var ProjectsDocument = import_client.gql`
+    ${y}`;function b(t){let e={...o,...t};return n.useQuery(s,e)}function _(t){let e={...o,...t};return n.useLazyQuery(s,e)}function C(t){let e={...o,...t};return n.useSuspenseQuery(s,e)}var u=a.gql`
     query Projects {
   projects {
     ...ProjectFields
   }
 }
-    ${ProjectFieldsFragmentDoc}`;
-function useProjectsQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery(ProjectsDocument, options);
-}
-function useProjectsLazyQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery(ProjectsDocument, options);
-}
-function useProjectsSuspenseQuery(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery(ProjectsDocument, options);
-}
-var AddBrandingDocument = import_client.gql`
+    ${d}`;function f(t){let e={...o,...t};return n.useQuery(u,e)}function k(t){let e={...o,...t};return n.useLazyQuery(u,e)}function T(t){let e={...o,...t};return n.useSuspenseQuery(u,e)}var l=a.gql`
     mutation AddBranding($favicon: String!) {
   addBranding(favicon: $favicon) {
     __typename
@@ -113,12 +38,7 @@ var AddBrandingDocument = import_client.gql`
     }
   }
 }
-    ${BrandingFieldsFragmentDoc}`;
-function useAddBrandingMutation(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation(AddBrandingDocument, options);
-}
-var AddProjectDocument = import_client.gql`
+    ${y}`;function R(t){let e={...o,...t};return n.useMutation(l,e)}var m=a.gql`
     mutation AddProject($companyCity: String!, $companyCountry: String!, $companyEmail: String!, $companyName: String!, $companyStreetAddress: String!, $companyZipCode: String!, $description: String!, $isCompany: Boolean!, $projectName: String!) {
   addProject(
     projectName: $projectName
@@ -142,25 +62,4 @@ var AddProjectDocument = import_client.gql`
     }
   }
 }
-    ${ProjectFieldsFragmentDoc}`;
-function useAddProjectMutation(baseOptions) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation(AddProjectDocument, options);
-}
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  AddBrandingDocument,
-  AddProjectDocument,
-  BrandingFieldsFragmentDoc,
-  BrandingsDocument,
-  ProjectFieldsFragmentDoc,
-  ProjectsDocument,
-  useAddBrandingMutation,
-  useAddProjectMutation,
-  useBrandingsLazyQuery,
-  useBrandingsQuery,
-  useBrandingsSuspenseQuery,
-  useProjectsLazyQuery,
-  useProjectsQuery,
-  useProjectsSuspenseQuery
-});
+    ${d}`;function V(t){let e={...o,...t};return n.useMutation(m,e)}0&&(module.exports={AddBrandingDocument,AddProjectDocument,BrandingFieldsFragmentDoc,BrandingsDocument,ProjectFieldsFragmentDoc,ProjectsDocument,useAddBrandingMutation,useAddProjectMutation,useBrandingsLazyQuery,useBrandingsQuery,useBrandingsSuspenseQuery,useProjectsLazyQuery,useProjectsQuery,useProjectsSuspenseQuery});
