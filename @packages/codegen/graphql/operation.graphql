@@ -18,6 +18,14 @@ fragment BrandingFields on Branding {
 fragment ProjectFields on Project {
   id
   projectName
+  companyCity
+  companyCountry
+  companyEmail
+  companyName
+  companyStreetAddress
+  companyZipCode
+  description
+  isCompany
 }
 
 mutation AddBranding($favicon: String!) {
@@ -34,8 +42,28 @@ mutation AddBranding($favicon: String!) {
   }
 }
 
-mutation AddProject($projectName: String!) {
-  addProject(projectName: $projectName) {
+mutation AddProject(
+  $companyCity: String!
+  $companyCountry: String!
+  $companyEmail: String!
+  $companyName: String!
+  $companyStreetAddress: String!
+  $companyZipCode: String!
+  $description: String!
+  $isCompany: Boolean!
+  $projectName: String!
+) {
+  addProject(
+    projectName: $projectName
+    companyCity: $companyCity
+    companyCountry: $companyCountry
+    companyEmail: $companyEmail
+    companyName: $companyName
+    companyStreetAddress: $companyStreetAddress
+    companyZipCode: $companyZipCode
+    description: $description
+    isCompany: $isCompany
+  ) {
     __typename
     ... on ProjectExists {
       __typename

@@ -16,7 +16,7 @@ export default function DashboardPage() {
   return (
     <>
       <TailwindIndicator />
-      <Tabs defaultValue="brandings" className="w-1/2 mx-auto mt-12">
+      <Tabs defaultValue="data-server" className="w-1/2 mx-auto mt-12">
         <TabsList>
           <TabsTrigger value="brandings">Personnalisation</TabsTrigger>
           <TabsTrigger value="data-server">Infos serveur</TabsTrigger>

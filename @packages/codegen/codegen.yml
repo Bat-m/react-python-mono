@@ -6,6 +6,11 @@ generates:
     config:
       withHooks: true
     plugins:
+      # - add:
+      #     content: 'import type { DocumentNode } from "graphql/language/ast";'
+      # - add:
+      #     content: "/* eslint-disable */"
       - typescript
       - typescript-operations
-      - typescript-urql
+      - typescript-react-apollo
+      # - typescript-urql
