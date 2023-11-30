@@ -4,15 +4,19 @@ version = "0.1.0"
 description = ""
 authors = ["Baptiste <53108208+Bat-m@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "api_main"}]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-
+SQLAlchemy = {version = "^2.0.22", extras = ["asyncio"]}
+strawberry-graphql = "^0.209.8"
+starlette = "^0.31.1"
+uvicorn = "^0.23.2"
+asyncpg = "^0.29.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-launch = "api_main:__init__"
+launch = "src.app:app"

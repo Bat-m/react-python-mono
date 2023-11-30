@@ -1,11 +1,19 @@
+import { ApolloWrapper } from "@/lib/apollo-wrapper";
+import "../styles/globals.css"
+import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Toaster />
+        <ApolloWrapper>{children}</ApolloWrapper>
+        
+      </body>
     </html>
   );
 }

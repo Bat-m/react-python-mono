@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": " poetry run launch",
-    "start": "poetry shell && poetry run launch"
+    "dev": "poetry run uvicorn src.app:app --reload --host 'localhost'",
+    "start": "poetry shell && poetry run uvicorn src.app:app --reload --host 'localhost'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
 }
+

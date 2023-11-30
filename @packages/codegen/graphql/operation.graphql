@@ -1,0 +1,77 @@
+query Brandings {
+  brandings {
+    ...BrandingFields
+  }
+}
+
+query Projects {
+  projects {
+    ...ProjectFields
+  }
+}
+
+fragment BrandingFields on Branding {
+  id
+  favicon
+}
+
+fragment ProjectFields on Project {
+  id
+  projectName
+  companyCity
+  companyCountry
+  companyEmail
+  companyName
+  companyStreetAddress
+  companyZipCode
+  description
+  isCompany
+}
+
+mutation AddBranding($favicon: String!) {
+  addBranding(favicon: $favicon) {
+    __typename
+    # ... on BrandingNotFound {
+    #   __typename
+    #   message
+    # }
+    ... on Branding {
+      __typename
+      ...BrandingFields
+    }
+  }
+}
+
+mutation AddProject(
+  $companyCity: String!
+  $companyCountry: String!
+  $companyEmail: String!
+  $companyName: String!
+  $companyStreetAddress: String!
+  $companyZipCode: String!
+  $description: String!
+  $isCompany: Boolean!
+  $projectName: String!
+) {
+  addProject(
+    projectName: $projectName
+    companyCity: $companyCity
+    companyCountry: $companyCountry
+    companyEmail: $companyEmail
+    companyName: $companyName
+    companyStreetAddress: $companyStreetAddress
+    companyZipCode: $companyZipCode
+    description: $description
+    isCompany: $isCompany
+  ) {
+    __typename
+    ... on ProjectExists {
+      __typename
+      message
+    }
+    ... on Project {
+      __typename
+      ...ProjectFields
+    }
+  }
+}

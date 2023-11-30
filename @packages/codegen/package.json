@@ -1,0 +1,26 @@
+{
+  "name": "@packages/codegen",
+  "private": true,
+  "main": "dist/graphql.js",
+  "types": "dist/graphql.d.ts",
+  "scripts": {
+    "codegen": "graphql-codegen --watch",
+    "dev": "codegen --watch & tsup graphql.ts --watch --dts --minify --format cjs --clean"
+  },
+  "graphql": {
+    "schema": "schema.graphql",
+    "documents": "src/**/*.{graphql,js,ts,jsx,tsx}"
+  },
+  "dependencies": {
+    "@graphql-codegen/add": "^5.0.0",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.1.0",
+    "@apollo/client": "^3.8.7",
+    "tsup": "^6.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.6"
+  }
+}
